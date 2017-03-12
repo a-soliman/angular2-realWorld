@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/common'], function(exports_1, context_1) {
+System.register(['angular2/core', 'angular2/common', './emailValidaors'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', 'angular2/common'], function(exports_1, contex
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, common_1;
+    var core_1, common_1, emailValidaors_1;
     var NewUserComponent;
     return {
         setters:[
@@ -19,13 +19,16 @@ System.register(['angular2/core', 'angular2/common'], function(exports_1, contex
             },
             function (common_1_1) {
                 common_1 = common_1_1;
+            },
+            function (emailValidaors_1_1) {
+                emailValidaors_1 = emailValidaors_1_1;
             }],
         execute: function() {
             NewUserComponent = (function () {
                 function NewUserComponent(fb) {
                     this.form = fb.group({
-                        name: [],
-                        email: [],
+                        name: ['', common_1.Validators.required],
+                        email: ['', common_1.Validators.compose([common_1.Validators.required, emailValidaors_1.EmailValidators.realEmail])],
                         phone: [],
                         address: fb.group({
                             street: [],
@@ -35,6 +38,9 @@ System.register(['angular2/core', 'angular2/common'], function(exports_1, contex
                         })
                     });
                 }
+                NewUserComponent.prototype.log = function (x) {
+                    console.log(x);
+                };
                 NewUserComponent = __decorate([
                     core_1.Component({
                         selector: 'new-user',
