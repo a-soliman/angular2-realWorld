@@ -1,5 +1,6 @@
 import {Component } from 'angular2/core';
-import {FormBuilder, ControlGroup} from 'angular2/common';
+import {FormBuilder, ControlGroup, Control, Validators} from 'angular2/common';
+import {EmailValidators} from './emailValidaors'
 
 @Component({
     selector: 'new-user',
@@ -8,11 +9,11 @@ import {FormBuilder, ControlGroup} from 'angular2/common';
 
 export class NewUserComponent {
     form: ControlGroup;
-
+    
     constructor(fb: FormBuilder) {
         this.form = fb.group({
-            name: [],
-            email: [],
+            name: ['', Validators.required],
+            email: ['', Validators.compose([Validators.required, EmailValidators.realEmail])],
             phone: [],
             address: fb.group({
                 street: [],
@@ -22,4 +23,13 @@ export class NewUserComponent {
             })
         });
     }
+
+    log(x) {
+        console.log(x);
+    }
+
+    
+
+
+    
 }
