@@ -41,6 +41,11 @@ System.register(['angular2/core', 'angular2/common', './emailValidaors'], functi
                 NewUserComponent.prototype.log = function (x) {
                     console.log(x);
                 };
+                NewUserComponent.prototype.routerCanDeactivate = function (next, previous) {
+                    if (this.form.dirty) {
+                        return confirm("Are you sure?");
+                    }
+                };
                 NewUserComponent = __decorate([
                     core_1.Component({
                         selector: 'new-user',
