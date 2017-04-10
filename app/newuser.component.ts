@@ -1,13 +1,14 @@
 import {Component } from 'angular2/core';
 import {FormBuilder, ControlGroup, Control, Validators} from 'angular2/common';
-import {EmailValidators} from './emailValidaors'
+import {EmailValidators} from './emailValidaors';
+import {CanDeactivate} from 'angular2/router'
 
 @Component({
     selector: 'new-user',
     templateUrl: 'app/newuser.component.html'
 })
 
-export class NewUserComponent {
+export class NewUserComponent implements CanDeactivate{
     form: ControlGroup;
     
     constructor(fb: FormBuilder) {
@@ -26,6 +27,12 @@ export class NewUserComponent {
 
     log(x) {
         console.log(x);
+    }
+
+    routerCanDeactivate(next, previous) {
+        if(this.form.dirty) {
+            return confirm("Are you sure?");
+        }
     }
 
     
